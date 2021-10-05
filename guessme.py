@@ -1,9 +1,33 @@
+import random
+
 print("*********************")
 print("BEM-VINDE AO GUESS ME")
 print("*********************")
 
-random_number = 33
-tries = 3
+random_number = random.randrange(1,101)
+level_check = False
+
+while (level_check == False):
+    
+    print("Escolha o nível de dificuldade\n")
+    print("[ 1 ] FÁCIL")
+    print("[ 2 ] INTERMEDIÁRIO")
+    print("[ 3 ] DIFÍCIL")
+
+    level = int(input(""))
+
+    if (level == 1):
+        tries = 20 
+        level_check = True
+    elif (level == 2):
+        tries = 10
+        level_check = True
+    elif (level == 3):
+        tries = 5
+        level_check = True
+    else:
+        print("esse nível não existe :P")
+        continue       
 
 for round in range(1,tries + 1):
 
@@ -14,17 +38,19 @@ for round in range(1,tries + 1):
     bigger = guess > random_number
     smaller = guess < random_number
 
-    if (guess < 1 | guess >  100):
-        print("Você digitou um número inválido :P")
-        continue
+    
 
     if(hit):
-        print("Você acertou! <3")
+        print("Você acertou! Te espero de novo <3")
         break
     else:
-        if(bigger):
-            print("uou, muito alto. Eu sou um pouco menor")
+        if(guess < 1 or guess >  100):
+            print("Você digitou um número inválido :P")
+            continue
         elif(smaller):
             print("Você deveria chutar um pouco mais alto")
+        elif (bigger):
+            print("uou, muito alto. Eu sou um pouco menor")
 
-print("Fim de jogo. Te espero de novo!")
+if(hit == False): 
+    print("Fim de jogo. O número secreto era {}. Te espero de novo!".format(random_number))
